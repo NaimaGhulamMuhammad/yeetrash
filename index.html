@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <link rel="shortcut icon" href="assets/yeetrash-logo.png" type="image/png">
+    <title>YEETRASH</title>
+
+    <link rel="stylesheet" href="style.css" />
+    
+  </head>
+  <body style="text-align: center">
+<!-- //yeetrash game -->
+
+   <div class="app" id="app">
+    <div class="app-header">
+      <div class="app-header-logo">
+        <img src="assets/yeetrash-logo.png" alt="YEETRASH" />
+      </div>
+      <!-- <div class="app-header-title">
+        <h1>YEETRASH</h1>
+      </div> -->
+    </div>
+    <div class="app-content>
+      <div class="app-content-header">
+        <h2>Welcome to YEETRASH</h2>
+      </div>
+      <div class="app-content-body">
+        <div class="app-content-body-buttons">
+          <button class="btn btn-primary" onclick="showGame();">
+            Start Game
+          </button>
+        </div>
+      </div>
+    </div>
+   </div>
+
+   <!-- //embed gameplay section -->
+    <div class="gameplay d-none" id="gameplay">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+
+    <!-- leaderbard modal -->
+    <div class="leaderboard-modal" id="leaderboard">
+      <div class="leaderboard-modal-header mt-5">
+        <h2>Leaderboard</h2>
+      </div>
+      <div class="leaderboard-modal-body">
+        <div class="leaderboard-modal-body-text" id="leaderbard-pos">
+            <table class="table table-striped table-primary ">
+              <thead>
+                <tr>
+                  <th scope="col">Player Name</th>
+                  <th scope="col">Team Name</th>
+                  <th scope="col">Score</th>
+                </tr>
+
+              </thead>
+              <tbody id="leaderboard-body">
+                
+              </tbody>
+            </table>
+          
+        </div>
+        <div class="leaderboard-modal-body-buttons my-5" >
+          <a onclick="" data-bs-toggle="collapse" href="#leaderboard" role="button" aria-expanded="false" aria-controls="leaderbard">
+            Close
+          </a>
+          <!-- <button class="btn btn-secondary" onclick="" data-bs-toggle="collapse" dara-bs-target="#leaderboard" aria-expanded="false" aria-controls="leaderbard" >
+            Close
+          </button> -->
+        </div>
+      </div>
+    </div>
+
+    
+      <div class="leaderboard-icon" >
+        <a title="LeaderBoard" onclick="showModal();" data-bs-toggle="collapse" href="#leaderboard" role="button" aria-expanded="true" aria-controls="leaderbard">
+        <img class="animate__animated animate__jello" src="assets/podium.png" alt="Leaderboard"/>
+      </a>
+      </div>
+
+    <script src="Build/YeeTrashDisabled.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/YeeTrashDisabled.data",
+        frameworkUrl: "Build/YeeTrashDisabled.framework.js",
+        codeUrl: "Build/YeeTrashDisabled.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "WitShell",
+        productName: "YEETRASH",
+        productVersion: "1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+
+      let leaderboard = document.getElementById("leaderboard-body");
+      const fetchData = async () => {
+        const response = await fetch("http://54.255.123.14:5000/leaderboard");
+        const data = await response.json();
+        // console.log(data);
+        data.forEach(element => {
+          const row = document.createElement("tr");
+          const player = document.createElement("td");
+          const team = document.createElement("td");
+          const score = document.createElement("td");
+          player.innerHTML = element.pName;
+          team.innerHTML = element.tName;
+          score.innerHTML = element.score;
+          row.appendChild(player);
+          row.appendChild(team);
+          row.appendChild(score);
+          leaderboard.appendChild(row);
+        }
+        );}
+
+        const showGame = () => {
+          document.getElementById("app").style.display = "none";
+          document.getElementById("gameplay").classList.remove("d-none");
+          // add transitions
+          document.getElementById("gameplay").classList.add("animate__animated", "animate__fadeIn");
+        }
+      fetchData();
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>
