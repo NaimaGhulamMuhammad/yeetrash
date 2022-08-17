@@ -32,7 +32,8 @@ canvas {
     width: 1280px;
     height: 720px;
     overflow: hidden;
-    margin: 2% auto;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 .leaderboard-modal{
     width: 500px;
@@ -122,8 +123,8 @@ canvas {
 }
 .site-logo{
     cursor: pointer;
-    width: 4vw;
-    height: 9vh;
+    width: 75px;
+    height: 80px;
     position: fixed;
     top: 5%;
     left: 3%;
@@ -133,12 +134,13 @@ canvas {
     animation: jello;
     animation-duration: 2s;
 }
-@media screen and (max-width: 1228px) {
+@media screen and (max-width: 1468px) {
     canvas { 
         width: 100%;
-        height: 100%;
+        height: 90%;
         overflow: hidden;
         margin: 0 auto;
+        margin-top: 0;
     }
 }
     
