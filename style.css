@@ -32,7 +32,7 @@ canvas {
     width: 1280px;
     height: 720px;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 2% auto;
 }
 .leaderboard-modal{
     width: 500px;
@@ -50,7 +50,7 @@ canvas {
     justify-content: space-around;
     align-items: center;
     color: #000;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
     /* display: none; */
 }
 .leaderboard-modal a{
@@ -65,17 +65,24 @@ canvas {
 }
 
 
-.logo{
+.app-header-logo{
     /* width: 100px;
     height: 100px; */
     margin: 0 auto;
     margin-top: 50px;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
+    cursor: pointer;
 }
+/* .app-header-logo:hover{
+    animation: heartBeat;
+    animation-duration: 4s;
+} */
 
 .btn{
     width: 200px;
+}
+.btn:hover{
+    animation: heartBeat;
+    animation-duration: 2s;
 }
 .leaderboard-icon img{
     height:10vh;
@@ -84,11 +91,47 @@ canvas {
     z-index: 999;
     /* infinite animation */
     animation-duration: 4s;
-  animation-iteration-count: infinite;
-  position: fixed;
-  bottom: 100px;
-  right: 100px;
+    animation-iteration-count: infinite;
+    position: fixed;
+    bottom: 5%;
+    left: 3%;
 
+}
+.social-icons{
+    position: absolute;
+    left: 3%;
+    bottom: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+.social-icons a{
+    padding: 10%;
+    height: 40px;
+}
+.social-icons a:hover{
+    /* height: 50px; */
+    animation: jello;
+    animation-duration: 2s;
+    transition: all ease-in-out;
+}
+.social-icons a svg{
+    height: 100%;
+}
+.site-logo{
+    cursor: pointer;
+    width: 4vw;
+    height: 9vh;
+    position: fixed;
+    top: 5%;
+    left: 3%;
+    z-index: 9;
+}
+.site-logo:hover{
+    animation: jello;
+    animation-duration: 2s;
 }
 @media screen and (max-width: 1228px) {
     canvas { 
