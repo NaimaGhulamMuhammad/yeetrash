@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="style.css" />
     
   </head>
-  <body style="text-align: center">
+  <body style="text-align: center" >
 <!-- //yeetrash game -->
 
    <div class="app" id="app">
@@ -32,8 +32,12 @@
       </div>
       <div class="app-content-body">
         <div class="app-content-body-buttons">
-          <button class="btn btn-primary" onclick="showGame();">
+          <button class="btn btn-primary" onclick="toggleGame();">
             Start Game
+          </button>
+          <button class="btn btn-primary " onclick="toggleTutorial();">
+            Watch tutorial
+            <span><img src="assets/icons8-play-button-circled-48.png" height="25px" alt="Yeetrash video tutorial Icon"/></span>
           </button>
         </div>
       </div>
@@ -41,12 +45,31 @@
    </div>
 
    <!-- //embed gameplay section -->
-    <div class="gameplay d-none" id="gameplay">
+    <div class="gameplay d-none animate__animated" id="gameplay">
       <canvas id="unity-canvas"></canvas>
+      <a class="btn close" onclick="toggleGame();">
+        Close
+      </a>
     </div>
 
+    <!-- // Video TUtorial -->
+    <div class="tutorial animate__animated d-none" id="tutorial">
+      <video width="100%" height="100%" controls>
+        <source src="yeetrash-game-embed--webdesign.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="app-content-body-buttons">
+        <!-- <button class="btn btn-primary" onclick="showGame();">
+          Start Game
+        </button> -->
+        <button class="btn btn-primary " onclick="toggleTutorial();">
+          Close
+          <span><img src="assets/icons8-play-button-circled-48.png" height="25px" alt="Yeetrash video tutorial Icon"/></span>
+        </button>
+      </div>
+    </div>
     <!-- leaderbard modal -->
-    <div class="leaderboard-modal" id="leaderboard">
+    <div class="leaderboard-modal" id="leaderboard" aria-expanded="false">
       <div class="leaderboard-modal-header mt-5">
         <h2>Leaderboard</h2>
       </div>
@@ -151,14 +174,31 @@
         }
         );}
 
-        const showGame = () => {
-          document.getElementById("app").style.display = "none";
-          document.getElementById("gameplay").classList.remove("d-none");
-          // add transitions
-          document.getElementById("gameplay").classList.add("animate__animated", "animate__fadeIn");
+        const toggleGame = ()=>{
+          const game = document.getElementById("gameplay");
+          const app = document.getElementById("app");
+          if(app.style.display === "none"){
+            game.classList.add("d-none", "animate__fadeOut");
+            app.style.display = "block";
+          }else{
+            game.classList.remove("d-none", "animate__fadeOut" );
+            game.classList.add("animate__fadeIn");
+            app.style.display = "none";
+          }
         }
-      // fetchData();
 
+        function toggleTutorial(){
+          const tutorial = document.getElementById("tutorial");
+          const app = document.getElementById("app");
+          if(app.style.display === "none"){
+            tutorial.classList.add("d-none", "animate__fadeOut");
+            app.style.display = "block";
+          }else{
+            tutorial.classList.remove("d-none", "animate__fadeOut");
+            tutorial.classList.add("animate__fadeIn");
+            app.style.display = "none";
+          }
+        }
       const leaderBoardModal = document.getElementById("leaderboard");
       leaderBoardModal.addEventListener('show.bs.collapse',async () => {
         await fetchData();

@@ -3,6 +3,9 @@
     padding:0;
     scroll-behavior: smooth;
 }
+:root{
+    --animation-duration: 800ms;
+}
 @font-face {
     font-family: 'highway';
     src: url('assets/electronic_highway_sign/EHSMB.TTF');
@@ -77,13 +80,36 @@ canvas {
     animation: heartBeat;
     animation-duration: 4s;
 } */
-
+.close{
+    position: absolute;
+    top: 7vh;
+    right: 20vh;
+    color: red;
+}
 .btn{
     width: 200px;
+    height: 50px;
 }
 .btn:hover{
-    animation: heartBeat;
+    animation: pulse;
     animation-duration: 2s;
+}
+.tutorial{
+    width: 60%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    z-index: 1;
+    background-color: rgb(52 114 173 / 93%);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #000;
+    overflow-y: scroll;
+    /* display: none; */
 }
 .leaderboard-icon img{
     height:10vh;
